@@ -17,7 +17,7 @@ import {
 	Points,
 	PointsMaterial,
 	VertexColors
-} from "/javascript/three.module.js";
+} from "./three.module.js";
 
 var OBJLoader = ( function () {
 
