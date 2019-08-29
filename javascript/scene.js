@@ -88,8 +88,8 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 function onDocumentMouseMove( event ) {
-	mouseX = ( event.clientX - windowHalfX ) / 2;
-	mouseY = ( event.clientY - windowHalfY ) / 2;
+	mouseX = event.clientX - windowHalfX;
+	mouseY = event.clientY - windowHalfY;
 }
 //
 function animate() {
@@ -97,15 +97,13 @@ function animate() {
 	render();
 }
 function render() {
-	//-40 x , 15 y is mouse left position
-	//40 x , 50 
-	//as we move across the page parametrize our statue position to a point along this,
-	//will also eventually adjust point light source to coordinate with this
-	//I think I probably want to use an orthographic camera and move the object instead of moving the camera.
-	//This will allow me to keep my spotlight fixed to my plane and shine where I intend it to.
-	camera.position.x = mouseX * (160 / window.innerWidth);
-	camera.position.y = (-mouseY * (70 / window.innerHeight)) + 32.5 ;
-	spotLight.position.set(mouseX, mouseY, 100);
+	camera.position.x = mouseX * (80 / window.innerWidth);
+	camera.position.y = (-mouseY * (35 / window.innerHeight)) + 32.5 ;
+	spotLight.position.set(mouseX, 300, 100);
+	let hue = Math.round(Math.abs((mouseX + windowHalfX) * (359/window.innerWidth)));
+	let saturation = 20;
+	let lightness = Math.round(Math.abs((mouseY - windowHalfY) * (100/window.innerHeight)));
+	spotLight.color.set(`hsl(${hue},${saturation}%,${lightness}%)`);
 	camera.lookAt( scene.position );
 	renderer.render( scene, camera );
 }
