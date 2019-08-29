@@ -1,0 +1,8 @@
+node_modules
+temp
+projects/tibet/server*
+*_site
+/**/*_site
+/**/*.DS_Store
+*.DS_Store
+package-lock.json
